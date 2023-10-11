@@ -1,23 +1,32 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "WebPPng",
+    name: "SwiftWebP",
+    platforms: [.iOS(.v13), .macCatalyst(.v13)],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "WebPPng",
-            targets: ["WebPPng"]),
+            name: "SwiftWebP",
+            targets: ["SwiftWebP"]),
+        .library(
+            name: "YYImageLib",
+            targets: ["YYImageLib"]),
+    ],
+    dependencies: [
+         .package(url: "https://github.com/SDWebImage/libwebp-Xcode", from: "1.1.0")
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "WebPPng"),
-        .testTarget(
-            name: "WebPPngTests",
-            dependencies: ["WebPPng"]),
+            name: "SwiftWebP",
+            dependencies: [
+                "YYImageLib",
+            ]),
+        .target(
+            name: "YYImageLib",
+            dependencies: [
+                .product(name: "libwebp", package: "libwebp-Xcode")
+            ])
     ]
 )

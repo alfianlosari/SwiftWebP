@@ -1,0 +1,3 @@
+module YYImageLib {
+    header "YYImageLib.h"
+}
